@@ -28,6 +28,11 @@ make bash
 composer require livewire/livewire
 ```
 
+## Ejecucion de migraciones 
+```bash
+docker run --rm -v $(pwd):/app composer php artisan migrate:refresh --seed
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
