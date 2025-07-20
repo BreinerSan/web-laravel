@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Question;
+use App\Models\Blog;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -47,6 +48,11 @@ class DatabaseSeeder extends Seeder
             'user_id' => fn() => User::inRandomOrder()->first()->id,
             'commentable_id' => $questions->random()->id,
             'commentable_type' => Question::class
+        ]);
+
+        Blog::factory(5)->create([
+            'user_id' => fn() => User::inRandomOrder()->first()->id,
+            'category_id' => fn() => $categories->random()->id
         ]);
     }
 }
