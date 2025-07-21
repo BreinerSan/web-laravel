@@ -10,4 +10,16 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    server: {
+        host: '0.0.0.0',       // escucha en todas las interfaces dentro del contenedor
+        port: 5173,
+        strictPort: true,      // falla si el puerto está ocupado (útil para depurar)
+        hmr: {
+            host: process.env.VITE_HMR_HOST ?? 'localhost', // ajusta al host que usas en el navegador
+            port: 5173,
+        },
+        watch: {
+            usePolling: true,    // necesario a menudo con volúmenes montados en Docker/WSL2
+        },
+    },
 });
