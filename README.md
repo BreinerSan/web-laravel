@@ -7,6 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Recursos
+Iconos -> se utilizo heroicons.dev para generar iconos en svg https://heroicons.dev/
+
 ## Configuracion
 1. Se ejecuta el siguiente comando para descargar el proyecto de laravel usando composer, ten en cuenta que la carpeta debe estar vacia
 ```bash
