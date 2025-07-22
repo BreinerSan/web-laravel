@@ -38,6 +38,7 @@ docker run --rm -v $(pwd):/app composer php artisan migrate:refresh --seed
 
 ## Pendientes
 Crear vista controlador para blog
+Crear la vista de una publicacion de un blog ya que una publicacion puede tener comentarios
 
 ## About Laravel
 

@@ -40,13 +40,13 @@ class DatabaseSeeder extends Seeder
 
         Comment::factory(100)->create([
             'user_id' => fn() => User::inRandomOrder()->first()->id,
-            'commentable_id' => $answers->random()->id,
+            'commentable_id' => fn() => $answers->random()->id,
             'commentable_type' => Answer::class
         ]);
 
         Comment::factory(100)->create([
             'user_id' => fn() => User::inRandomOrder()->first()->id,
-            'commentable_id' => $questions->random()->id,
+            'commentable_id' => fn() => $questions->random()->id,
             'commentable_type' => Question::class
         ]);
 
