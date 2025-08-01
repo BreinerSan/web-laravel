@@ -39,7 +39,7 @@ docker run --rm -v $(pwd):/app composer php artisan migrate:refresh --seed
 ## Pendientes
 Crear vista controlador para blog
 Crear la vista de una publicacion de un blog ya que una publicacion puede tener comentarios
-
+Agregar el formulario de comentarios (o agregar respuestas) en el foro y en el blog
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
