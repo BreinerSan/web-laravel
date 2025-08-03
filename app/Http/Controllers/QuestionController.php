@@ -14,4 +14,17 @@ class QuestionController extends Controller
 
         return view('questions.show', compact('question'));
     }
+
+    public function destroy(Question $question)
+    {
+        // Verifica si el usuario autenticado es el propietario de la pregunta
+        // if (auth()->user()->id !== $question->user_id) {
+        //     return redirect()->route('questions.show', $question)->with('error', 'No tienes permiso para eliminar esta pregunta.');
+        // }
+
+        // Elimina la pregunta
+        $question->delete();
+
+        return redirect()->route('home');
+    }
 }
