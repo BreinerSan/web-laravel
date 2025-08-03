@@ -7,6 +7,17 @@ use App\Models\Question;
 
 class QuestionController extends Controller
 {
+
+    public function index()
+    {
+        $questions = Question::with([
+            'user',
+            'category'
+        ])->latest()->paginate(24);
+
+        return view('questions.index', compact('questions'));
+    }
+
     public function show(Question $question)
     {
 
