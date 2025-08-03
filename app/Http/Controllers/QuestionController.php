@@ -9,8 +9,30 @@ class QuestionController extends Controller
 {
     public function show(Question $question)
     {
-        // Basicamente hace que a la consulta que ya existe agregale los datos de la categoria y el usuario
-        $question->load('answers', 'category', 'user');
+
+        $userId = 20;
+
+        // Obtenemos la pregunta con las relaciones necesarias
+        $question->load([
+            'user',
+            'category',
+
+            'answers' => fn ($query) => $query->with([
+                'user',
+                'hearts' => fn ($query) => $query->where('user_id', $userId),
+                'comments' => fn ($query) => $query->with([
+                    'user',
+                    'hearts' => fn ($query) => $query->where('user_id', $userId),
+                ])
+            ]),
+
+            'comments' => fn ($query) => $query->with([
+                'user',
+                'hearts' => fn ($query) => $query->where('user_id', $userId),
+            ]),
+
+            'hearts' => fn ($query) => $query->where('user_id', $userId),
+        ]);
 
         return view('questions.show', compact('question'));
     }
