@@ -19,7 +19,7 @@
                 <a href="#" class="text-xs font-semibold hover:underline">
                     Edit
                 </a>
-                
+
                 <form action="#" onsubmit="return confirm('¿Estás seguro de eliminar esta pregunta?');">
                     @csrf
                     @method('DELETE')
@@ -37,16 +37,19 @@
         {{ $question->description }}
     </p>
 
-    <!-- Comments --> 
-    <livewire:comment :commentable="$question" />   
+    <h3 class="text-lg font-semibold mb-2 mt-4">Comments</h3>
+    <!-- Comments -->
+    <livewire:comment :commentable="$question" />
 
 </div>
+
+<h3 class="text-lg font-semibold mb-2 mt-4">Answers</h3>
 
 <ul class="space-y-4">
     @foreach ($question->answers as $answer)
         <li>
             <div class="flex items-start gap-2">
-                <livewire:heart :heartable="$answer" />
+                <livewire:heart :heartable="$answer" wire:key="answer-heart-{{ $answer->id }}" />
 
                 <div>
                     <p class="text-sm text-gray-300">
@@ -55,10 +58,10 @@
                     <p class="text-xs text-gray-500">
                         {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}
                     </p>
-                    
-                    <livewire:comment :commentable="$answer" />
+
+                    <livewire:comment :commentable="$answer" wire:key="answer-comments-{{ $answer->id }}" />
                 </div>
-            </div>  
+            </div>
         </li>
     @endforeach
 </ul>
