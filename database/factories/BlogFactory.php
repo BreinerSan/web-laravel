@@ -17,8 +17,10 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
-            'content' => fake()->paragraph()
+            'title' => fake()->sentence(6, true),
+            'content' => fake()->paragraphs(4, true) . "\n\n" .
+                        fake()->paragraphs(3, true) . "\n\n" .
+                        fake()->paragraphs(2, true)
         ];
     }
 }
