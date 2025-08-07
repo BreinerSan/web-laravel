@@ -43,6 +43,33 @@ class QuestionController extends Controller
         return redirect()->route('questions.show', $question)->with('success', 'Pregunta creada exitosamente.');
     }
 
+    public function edit(Question $question){
+
+        $categories = Category::all();
+        return view('questions.edit', compact('question', 'categories'));
+    }
+
+    public function update(Request $request, Question $question)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        // Verifica si el usuario autenticado es el propietario de la pregunta
+        // if (auth()->user()->id !== $question->user_id) {
+        //     return redirect()->route('questions.show', $question)->with('error', 'No tienes permiso para editar esta pregunta.');
+        // }
+
+        $question->category_id = $request->category_id;
+        $question->title = $request->title;
+        $question->description = $request->description;
+        $question->save();
+
+        return redirect()->route('questions.show', $question)->with('success', 'Pregunta actualizada exitosamente.');
+    }
+
     public function show(Question $question)
     {
 

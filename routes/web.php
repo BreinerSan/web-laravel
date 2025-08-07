@@ -11,6 +11,8 @@ Route::get('questions/create', [QuestionController::class, 'create'])->name('que
 Route::post('questions', [QuestionController::class, 'store'])->name('questions.store');
 Route::get('questions', [QuestionController::class, 'index'])->name('questions.index');
 Route::get('questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
+Route::get('questions/{question}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
+Route::put('questions/{question}', [QuestionController::class, 'update'])->name('questions.update');
 Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store');
