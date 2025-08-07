@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Question;
 
@@ -16,6 +17,30 @@ class QuestionController extends Controller
         ])->latest()->paginate(24);
 
         return view('questions.index', compact('questions'));
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('questions.create', compact('categories'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $question = new Question();
+        $question->user_id = 20;
+        $question->category_id = $request->category_id;
+        $question->title = $request->title;
+        $question->description = $request->description;
+        $question->save();
+
+        return redirect()->route('questions.show', $question)->with('success', 'Pregunta creada exitosamente.');
     }
 
     public function show(Question $question)
