@@ -21,5 +21,13 @@ export default defineConfig({
         watch: {
             usePolling: true,    // necesario a menudo con volúmenes montados en Docker/WSL2
         },
+        // Agregar configuración de optimización
+        optimizeDeps: {
+            include: ['laravel-vite-plugin'],
+        },
+        // Configuración para ESM
+        define: {
+            global: 'globalThis',
+        },
     },
 });

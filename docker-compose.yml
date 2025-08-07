@@ -10,9 +10,17 @@ services:
       - .:/var/www/html
     ports:
       - "80:80"
-      # - "5173:5173"
+      - "5173:5173"
     # depends_on:
     #   - mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
     command: php artisan serve --host=0.0.0.0 --port=80
 
   # mysql:
