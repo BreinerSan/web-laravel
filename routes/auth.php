@@ -8,3 +8,5 @@ Route::middleware(['guest'])->group(function () {
     Route::get('password/request', Login::class)->name('password.request');
     Route::get('register', Login::class)->name('register');
 });
+
+Route::post('logout', App\Livewire\Actions\Logout::class)->name('logout');
