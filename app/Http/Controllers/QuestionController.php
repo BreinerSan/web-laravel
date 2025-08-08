@@ -34,7 +34,7 @@ class QuestionController extends Controller
         ]);
 
         $question = new Question();
-        $question->user_id = 20;
+        $question->user_id = auth()->id();
         $question->category_id = $request->category_id;
         $question->title = $request->title;
         $question->description = $request->description;
@@ -73,7 +73,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
 
-        $userId = 20;
+        $userId = auth()->id();
 
         // Obtenemos la pregunta con las relaciones necesarias
         $question->load([

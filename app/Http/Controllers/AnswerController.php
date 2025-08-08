@@ -16,7 +16,7 @@ class AnswerController extends Controller
 
         $question->answers()->create([
             'content' => $request->input('content'),
-            'user_id' => 20, // Assuming user is authenticated
+            'user_id' => auth()->id(),
         ]);
 
         // Redirect back to the question page

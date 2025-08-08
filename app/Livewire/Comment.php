@@ -23,13 +23,13 @@ class Comment extends Component
 
         $this->commentable->comments()->create([
             'content' => $this->content,
-            'user_id' => 20,
+            'user_id' => auth()->id(),
         ]);
 
         $this->content = '';
         $this->showForm = false;
 
-        // Otra opcion es 
+        // Otra opcion es
         $this->reset('content', 'showForm');
     }
 

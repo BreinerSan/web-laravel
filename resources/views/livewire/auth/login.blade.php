@@ -57,9 +57,21 @@
 
     @if(Route::has('register'))
         <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
+            <span>{{ __('Don\'t have an account?') }}</span>
             <a href="{{ route('register') }}" class="text-sm text-blue-600 hover:underline" wire:navigate>
-                {{ __('Don\'t have an account? Register') }}
+                {{ __('Sign up') }}
             </a>
+        </div>
+    @endif
+
+    <!-- Muestro el mensaje de error -->
+    @if ($errors->any())
+        <div class="mt-4">
+            <ul class="list-disc list-inside text-sm text-red-600">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
 </div>
