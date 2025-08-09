@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasHeart;
+use Italofantone\Sluggable\Sluggable;
 
 class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
-    use HasFactory, HasHeart;
+    use HasFactory, HasHeart, Sluggable;
 
     public function category(){
         return $this->belongsTo(Category::class);

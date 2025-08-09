@@ -40,6 +40,14 @@ docker run --rm -v $(pwd):/app composer php artisan migrate:refresh --seed
 Crear vista controlador para blog
 Crear la vista de una publicacion de un blog ya que una publicacion puede tener comentarios
 Agregar el formulario de comentarios (o agregar respuestas) en el foro y en el blog
+
+## Adicional
+- El componente de slug no funciono al momento de realizar las migraciones
+- Se agrega el proyecto del profesor del curso para copiar las estructuras del sistema de login que trae (esta en livewire)
+
+Nota: CURSO COMPLETADO
+tomado de [Platzi-laravel-livewire-nivel:basico](https://platzi.com/cursos/desarrollo-laravel/)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
