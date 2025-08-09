@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Http\Requests\StoreQuestion;
+use App\Http\Requests\UpdateQuestion;
+use App\Support\QuestionShowLoader;
 
 class QuestionController extends Controller
 {
@@ -25,14 +28,8 @@ class QuestionController extends Controller
         return view('questions.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreQuestion $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
         $question = new Question();
         $question->user_id = auth()->id();
         $question->category_id = $request->category_id;
@@ -49,15 +46,9 @@ class QuestionController extends Controller
         return view('questions.edit', compact('question', 'categories'));
     }
 
-    public function update(Request $request, Question $question)
+    public function update(UpdateQuestion $request, Question $question)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        // Verifica si el usuario autenticado es el propietario de la pregunta
+        // Verifica si el usuario autenticado es el propietario de la pregunta (Esta validación esta en un Policy)
         // if (auth()->user()->id !== $question->user_id) {
         //     return redirect()->route('questions.show', $question)->with('error', 'No tienes permiso para editar esta pregunta.');
         // }
@@ -70,32 +61,9 @@ class QuestionController extends Controller
         return redirect()->route('questions.show', $question)->with('success', 'Pregunta actualizada exitosamente.');
     }
 
-    public function show(Question $question)
+    public function show(Question $question, QuestionShowLoader $loader)
     {
-
-        $userId = auth()->id();
-
-        // Obtenemos la pregunta con las relaciones necesarias
-        $question->load([
-            'user',
-            'category',
-
-            'answers' => fn ($query) => $query->with([
-                'user',
-                'hearts' => fn ($query) => $query->where('user_id', $userId),
-                'comments' => fn ($query) => $query->with([
-                    'user',
-                    'hearts' => fn ($query) => $query->where('user_id', $userId),
-                ])
-            ]),
-
-            'comments' => fn ($query) => $query->with([
-                'user',
-                'hearts' => fn ($query) => $query->where('user_id', $userId),
-            ]),
-
-            'hearts' => fn ($query) => $query->where('user_id', $userId),
-        ]);
+        $loader->load($question);
 
         return view('questions.show', compact('question'));
     }
